@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVとは？｜エネルギー問題研究所 Maaya Village®</title>
+<meta name="description" content="Maaya Village®（MV）は、目に見えない「情報・周波数・エネルギー」から生じる問題に取り組む、2009年創設のエネルギー問題研究所です。">
+<meta property="og:title" content="MVとは？｜エネルギー問題研究所 Maaya Village®">
+<meta property="og:description" content="目に見えない「情報・周波数・エネルギー」から生じる問題に取り組む、エネルギー問題研究所。MVの考え方を、はじめての方へ。">
+<meta property="og:type" content="website">
+<!-- og:image は共有用サムネイル。公開前に images/ 配下の画像パスを指定してコメントを外してください
+<meta property="og:image" content="images/ogp.png"> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C1322;
+  --bg2:#101B2E;
+  --panel:#152238;
+  --panel2:#182842;
+  --line:rgba(233,238,245,.12);
+  --text:#E9EEF5;
+  --muted:#96A5BA;
+  --accent:#7CC9BD;
+  --accent-dim:rgba(124,201,189,.16);
+  --lamp:#D8B36A;
+  --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+/* 固定ヘッダーに小さい英字ラベルが隠れず、上に余白が空きすぎないよう、
+   セクションごとの上padding差を吸収してジャンプ位置を揃える */
+#about,#story{scroll-margin-top:-2px}
+#theory,#start{scroll-margin-top:102px}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--sans);
+  font-size:16px;line-height:2;letter-spacing:.04em;-webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+section{padding:104px 0}
+/* WHAT IS MV セクション背景：糸の結び目（問題の明確化）を右固定で表示 */
+#about{position:relative;background:linear-gradient(90deg,rgba(12,19,34,.88) 0%,rgba(12,19,34,.72) 50%,rgba(12,19,34,.56) 100%),url("images/sec-about.png") right center/cover no-repeat,var(--bg)}
+#about .wrap{position:relative;z-index:2}
+/* APPROACH セクション最上部：糸がほどける（解決が進む）画像。上薄く下濃く、境目で空セクションとつながる */
+#start{position:relative;background:linear-gradient(180deg,rgba(12,19,34,.7) 0%,rgba(12,19,34,.88) 22%,var(--bg) 40%),url("images/sec-approach-top.jpg") top center/100% auto no-repeat,var(--bg)}
+#start .wrap{position:relative;z-index:2}
+.eyebrow{font-size:12px;letter-spacing:.34em;color:var(--accent);text-transform:uppercase;margin-bottom:22px;font-weight:500}
+.eyebrow-icon{display:inline-block;width:16px;height:16px;vertical-align:-3px;margin-right:13px}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,4vw,34px);line-height:1.7;letter-spacing:.06em;margin-bottom:34px}
+.lead{color:var(--muted);max-width:640px}
+.note{font-size:12.5px;color:var(--muted);line-height:1.9}
+
+.rv{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .ring,.orb-sun{animation:none!important}
+}
+
+/* ヘッダー */
+header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(12,19,34,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px}
+.brand{font-family:var(--serif);font-size:17px;letter-spacing:.14em;color:var(--text);font-weight:600}
+.brand small{display:block;font-size:10px;letter-spacing:.3em;color:var(--accent);font-family:var(--sans);font-weight:500}
+nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+nav a{color:var(--muted);font-size:13px;letter-spacing:.1em}
+nav a:hover{color:var(--text);text-decoration:none}
+.hd-cta{border:1px solid var(--accent);color:var(--accent);padding:8px 18px;border-radius:999px;font-size:13px}
+.hd-cta:hover{background:var(--accent-dim);text-decoration:none}
+@media(max-width:720px){nav a:not(.hd-cta){display:none}}
+
+/* ヒーロー */
+.hero{min-height:100svh;display:flex;align-items:center;position:relative;overflow:hidden;padding:140px 0 90px;background:linear-gradient(90deg,rgba(12,19,34,.70) 0%,rgba(12,19,34,.48) 45%,rgba(12,19,34,.38) 100%),radial-gradient(1000px 600px at 78% 24%, rgba(20,35,60,.5) 0%, transparent 60%),url("images/hero-bg.png") left center/cover no-repeat,var(--bg)}
+.hero .wrap{position:relative;z-index:2}
+.orb{position:absolute;top:23%;right:10%;width:280px;height:280px;pointer-events:none;z-index:1;opacity:.82}
+.orb-sun{position:absolute;inset:0;width:100%;height:100%;transform-origin:center;animation:breathe 5.5s ease-in-out infinite}
+.ring{position:absolute;inset:0;margin:auto;border-radius:50%;border:1px solid rgba(124,201,189,.35);width:12px;height:12px;opacity:0;animation:ripple 7s linear infinite}
+.ring:nth-child(2){animation-delay:1.75s}
+.ring:nth-child(3){animation-delay:3.5s}
+.ring:nth-child(4){animation-delay:5.25s}
+@keyframes ripple{0%{width:12px;height:12px;opacity:0}8%{opacity:.7}100%{width:280px;height:280px;opacity:0}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@media(max-width:820px){.hero{background:linear-gradient(180deg,rgba(12,19,34,.55) 0%,rgba(12,19,34,.62) 55%,rgba(12,19,34,.78) 100%),url("images/hero-bg.png") left center/cover no-repeat,var(--bg)}
+  .orb{width:190px;height:190px;top:6%;right:-24px;opacity:.82}
+  @keyframes ripple{0%{width:12px;height:12px;opacity:0}8%{opacity:.7}100%{width:190px;height:190px;opacity:0}}}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,5vw,44px);line-height:1.95;letter-spacing:.06em;margin-bottom:30px;max-width:21em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .sub{color:var(--muted);max-width:34em;margin-bottom:44px}
+.btn{display:inline-block;background:var(--accent);color:#0B1220;font-weight:700;font-size:14px;letter-spacing:.12em;padding:16px 34px;border-radius:999px}
+.btn:hover{filter:brightness(1.08);text-decoration:none}
+.hero .eyebrow{display:flex;align-items:center;gap:12px}
+.hero .eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
+
+/* 共感チェック */
+.checks{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.checklist{list-style:none;margin:8px 0 34px;max-width:640px}
+.checklist li{position:relative;padding:16px 0 16px 44px;border-bottom:1px solid var(--line);color:var(--text)}
+.checklist li::before{content:"";position:absolute;left:4px;top:22px;width:18px;height:18px;border:1.5px solid var(--accent);border-radius:4px}
+.checklist li::after{content:"";position:absolute;left:9px;top:25px;width:8px;height:5px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg);opacity:.9}
+.bridge{font-family:var(--serif);font-size:clamp(18px,2.6vw,22px);line-height:2.1;letter-spacing:.06em;max-width:36em}
+.bridge strong{color:var(--accent);font-weight:600}
+
+/* 定義 */
+.kw{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:44px 0 10px}
+.kw div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:26px 20px;text-align:center}
+.kw b{font-family:var(--serif);font-size:19px;letter-spacing:.14em;display:block;margin-bottom:8px}
+.kw span{font-size:13px;color:var(--muted);line-height:1.8;display:block}
+/* アイコン付きキーワード枠（情報・周波数・エネルギー共通）：見出し左寄せ＋右上に大きめ・薄めアイコン */
+.kw-iconbox{position:relative;overflow:hidden}
+.kw-iconbox b{text-align:left;padding-left:28px;margin-top:-6px;margin-bottom:14px}
+.kw-icon{position:absolute;top:16px;right:32px;width:48px;height:48px;color:var(--accent);opacity:.22;pointer-events:none}
+/* エネルギーは文字数が多いので、見出しだけ左に寄せてアイコンとの被りを回避 */
+.kw-energy b{padding-left:6px}
+@media(max-width:680px){.kw{grid-template-columns:1fr}}
+
+/* 図版共通 */
+.figure{margin:48px 0 6px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+.figure img{width:100%;height:auto}
+.figcap{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;letter-spacing:.06em}
+
+/* 三層構造（CSS描画） */
+.layers{margin:52px 0 18px}
+.layer{border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin-bottom:12px;background:var(--panel);display:flex;gap:20px;align-items:baseline;flex-wrap:wrap}
+/* 各層の枠：装飾画像を右端に薄く配置（位置・サイズ・薄さは共通、画像だけ各層で差し替え） */
+.layer-face,.layer-brain,.layer-storm{position:relative;overflow:hidden}
+.layer-face::after,.layer-brain::after,.layer-storm::after{content:"";position:absolute;top:-2%;right:-24px;width:165px;height:105%;background-repeat:no-repeat;background-position:right center;background-size:contain;opacity:.11;pointer-events:none}
+.layer-face::after{background-image:url("images/profile-teal.png");right:-8px}
+.layer-brain::after{background-image:url("images/brain-teal.png")}
+.layer-storm::after{background-image:url("images/storm-teal.png")}
+.layer-face>*,.layer-brain>*,.layer-storm>*{position:relative;z-index:1}
+.layer .tag{font-size:11px;letter-spacing:.24em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 12px;white-space:nowrap}
+.layer h3{font-family:var(--serif);font-size:18px;font-weight:600;letter-spacing:.08em}
+.layer p{width:100%;font-size:14px;color:var(--muted);line-height:1.9}
+.layer.deep{background:linear-gradient(180deg,var(--panel2),#15304A);border-color:rgba(124,201,189,.45);box-shadow:0 0 40px rgba(124,201,189,.12) inset}
+.layer.deep .tag{color:var(--accent);border-color:rgba(124,201,189,.45)}
+.layer-arrow{text-align:center;color:var(--muted);font-size:12px;letter-spacing:.2em;padding:2px 0 14px}
+
+/* ストーリー */
+.story{position:relative;background:linear-gradient(180deg,rgba(16,27,46,.62) 0%,rgba(16,27,46,.78) 38%,rgba(16,27,46,.96) 62%,var(--bg2) 80%),url("images/sec-origin.png") top center/100% auto no-repeat,var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.story .wrap{position:relative;z-index:2}
+.tl{list-style:none;margin-top:20px;border-left:1px solid var(--line);padding-left:34px}
+.tl li{position:relative;padding-bottom:38px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:-39px;top:12px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(124,201,189,.15)}
+.tl h3{font-family:var(--serif);font-size:17.5px;font-weight:600;margin-bottom:6px;letter-spacing:.06em}
+.tl p{font-size:14.5px;color:var(--muted);line-height:2;max-width:38em}
+.tl .yr{font-size:12px;letter-spacing:.2em;color:var(--accent);display:block;margin-bottom:4px}
+
+/* 空 */
+.kuu{position:relative;overflow:hidden;text-align:center;background:linear-gradient(180deg,var(--bg) 72%,rgba(12,19,34,.95) 86%,rgba(12,19,34,.7) 100%),url("images/sec-kuu-bottom.jpg") bottom center/100% auto no-repeat,var(--bg)}
+.kuu .wrap{position:relative;z-index:2}
+.kuu .glyph{font-family:var(--serif);font-size:clamp(120px,22vw,220px);font-weight:500;color:transparent;-webkit-text-stroke:1px rgba(124,201,189,.35);line-height:1;user-select:none;margin-bottom:-26px}
+.kuu blockquote{font-family:var(--serif);font-size:clamp(17px,2.4vw,21px);line-height:2.3;letter-spacing:.08em;max-width:32em;margin:0 auto 26px}
+.kuu cite{font-style:normal;font-size:13px;color:var(--muted);letter-spacing:.14em}
+.kuu .desc{max-width:36em;margin:0 auto;text-align:left;color:var(--muted);font-size:14.5px}
+.kuu .figure{max-width:620px;margin:44px auto 8px}
+
+/* 4ステップ */
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:28px 26px}
+/* STEP枠：アイコンを右上角に大きめ・薄く配置（はみ出し部分は枠で隠す） */
+.step-icon{position:relative;overflow:hidden}
+.step-icon::after{content:"";position:absolute;top:-6px;right:-6px;width:130px;height:130px;background-repeat:no-repeat;background-position:right top;background-size:contain;opacity:.11;pointer-events:none}
+.step1::after{background-image:url("images/step1-icon.svg")}
+.step2::after{background-image:url("images/step2-icon.svg")}
+.step3::after{background-image:url("images/step3-icon.svg")}
+.step4::after{background-image:url("images/step4-icon.svg")}
+.step-icon>*{position:relative;z-index:1}
+.step .no{font-family:var(--serif);font-size:13px;letter-spacing:.26em;color:var(--accent);display:block;margin-bottom:12px}
+.step h3{font-family:var(--serif);font-size:20px;font-weight:600;margin-bottom:10px;letter-spacing:.1em}
+.step p{font-size:14px;color:var(--muted);line-height:1.95;margin-bottom:14px}
+.step .to{font-size:12.5px;color:var(--muted)}
+.step .to a{margin-right:10px;white-space:nowrap}
+@media(max-width:680px){.steps{grid-template-columns:1fr}}
+
+/* 9ワールド */
+.worlds{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:40px}
+.wcard{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px 18px;color:var(--text);transition:border-color .3s,transform .3s}
+.wcard:hover{border-color:var(--accent);transform:translateY(-3px);text-decoration:none}
+.wcard b{font-family:var(--serif);font-size:15.5px;font-weight:600;display:block;margin-bottom:6px;letter-spacing:.06em}
+.wcard span{font-size:12px;color:var(--muted);line-height:1.7;display:block}
+.wcard .wno{font-size:10.5px;letter-spacing:.3em;color:var(--accent);display:block;margin-bottom:8px}
+
+/* FAQ */
+details{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;list-style:none;padding:20px 24px;font-weight:700;font-size:15px;display:flex;gap:14px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q";font-family:var(--serif);color:var(--accent);font-size:17px}
+details p{padding:16px 24px 22px 52px;font-size:14.5px;color:var(--muted)}
+details[open] summary{border-bottom:1px solid var(--line)}
+
+/* CTAハブ */
+.hub{text-align:center;position:relative;background:linear-gradient(90deg,rgba(12,19,34,.5) 0%,rgba(12,19,34,.66) 55%,rgba(12,19,34,.86) 100%),url("images/sec-hub.jpg") top center/100% auto no-repeat,var(--bg)}
+.hub .wrap{position:relative;z-index:2}
+.hub .wrap{position:relative;z-index:2}
+.hub .wrap{position:relative;z-index:2}
+.hub h2{margin-bottom:14px}
+.hub .lead{margin:0 auto 46px}
+.hubgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+.hcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:12px;color:var(--text);transition:border-color .3s,transform .3s}
+.hcard:hover{border-color:var(--accent);transform:translateY(-3px);text-decoration:none}
+.hcard .free{font-size:10.5px;letter-spacing:.24em;color:var(--accent)}
+.hcard b{font-family:var(--serif);font-size:18px;font-weight:600;letter-spacing:.08em}
+.hcard span{font-size:13px;color:var(--muted);line-height:1.9}
+.hcard .go{margin-top:auto;font-size:13px;color:var(--accent)}
+@media(max-width:760px){.hubgrid{grid-template-columns:1fr}}
+
+/* フッター */
+footer{border-top:1px solid var(--line);padding:56px 0 70px;background:#0A101D}
+.disclaimer{border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-bottom:36px;background:var(--bg2)}
+.disclaimer p{font-size:12.5px;color:var(--muted);line-height:2}
+.flinks{display:flex;flex-wrap:wrap;gap:8px 24px;margin-bottom:24px}
+.flinks a{font-size:12.5px;color:var(--muted)}
+.copy{font-size:12px;color:#5D6B80;letter-spacing:.08em}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <div class="brand">Maaya Village<small>エネルギー問題研究所</small></div>
+    <nav>
+      <a href="#about">MVとは</a>
+      <a href="#theory">考え方</a>
+      <a href="#story">歩み</a>
+      <a href="#start">はじめ方</a>
+      <a class="hd-cta" href="https://maayavillage.ocnk.net/" target="_blank" rel="noopener">オンラインショップ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <div class="orb" aria-hidden="true">
+    <svg class="orb-sun" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FDF6E0" stop-opacity="0.9"/>
+          <stop offset="14%" stop-color="#FBEEC8" stop-opacity="0.82"/>
+          <stop offset="32%" stop-color="#F3CE7C" stop-opacity="0.62"/>
+          <stop offset="58%" stop-color="#DE9E42" stop-opacity="0.28"/>
+          <stop offset="82%" stop-color="#7CC9BD" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="#7CC9BD" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="heroCore" cx="50%" cy="47%" r="60%">
+          <stop offset="0%" stop-color="#FFFBEF"/>
+          <stop offset="34%" stop-color="#FBEDC4" stop-opacity="0.92"/>
+          <stop offset="62%" stop-color="#F3CE7C" stop-opacity="0.72"/>
+          <stop offset="82%" stop-color="#E9B25A" stop-opacity="0.36"/>
+          <stop offset="100%" stop-color="#E0A44A" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="heroHorizX" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#EEBE62" stop-opacity="0"/>
+          <stop offset="30%" stop-color="#EEBE62" stop-opacity="0.10"/>
+          <stop offset="50%" stop-color="#F0C56E" stop-opacity="0.24"/>
+          <stop offset="70%" stop-color="#EEBE62" stop-opacity="0.10"/>
+          <stop offset="100%" stop-color="#EEBE62" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="heroEllipse" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/>
+          <stop offset="55%" stop-color="#FFFFFF" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </radialGradient>
+        <mask id="heroTaper"><ellipse cx="150" cy="150" rx="132" ry="10" fill="url(#heroEllipse)"/></mask>
+      </defs>
+      <circle cx="150" cy="150" r="120" fill="url(#heroGlow)"/>
+      <rect x="18" y="136" width="264" height="28" fill="url(#heroHorizX)" mask="url(#heroTaper)"/>
+      <circle cx="150" cy="150" r="27" fill="url(#heroCore)"/>
+      <circle cx="150" cy="150" r="6" fill="#FFFDF4" opacity="0.55"/>
+    </svg>
+    <span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="ring"></span>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow">ENERGY PROBLEM LABORATORY / SINCE 2009</p>
+    <h1>がんばっても、変わらない。<br>
+    その原因は、あなたではなく——<br>
+    あなたを取り巻く<em>"見えない情報"</em><br>かもしれません。</h1>
+    <p class="sub">Maaya Village®（MV）は、目に見えない「情報・周波数・エネルギー」から生じる問題に取り組む、日本でも類をみない<br>「エネルギー問題研究所」です。</p>
+    <a class="btn" href="#about">MVの考え方を3分で知る</a>
+  </div>
+</div>
+
+<!-- 共感チェック -->
+<section class="checks">
+  <div class="wrap rv">
+    <p class="eyebrow"><svg class="eyebrow-icon" viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M593-80q-24 0-46-9t-39-26L304-320l33-34q14-14 34-19t40 0l69 20v-287q0-17 11.5-28.5T520-680q17 0 28.5 11.5T560-640v393l-98-28 103 103q6 6 13 9t15 3h167q33 0 56.5-23.5T840-240v-160q0-17 11.5-28.5T880-440q17 0 28.5 11.5T920-400v160q0 66-47 113T760-80H593Zm7-280v-160q0-17 11.5-28.5T640-560q17 0 28.5 11.5T680-520v160h-80Zm120 0v-120q0-17 11.5-28.5T760-520q17 0 28.5 11.5T800-480v120h-80Zm40 200H565h195Zm-600-40q-33 0-56.5-23.5T80-280v-480q0-33 23.5-56.5T160-840h600q33 0 56.5 23.5T840-760v160h-80v-160H160v480h72l79 80H160Z"/></svg>CHECK</p>
+    <h2>こんな経験、ありませんか？</h2>
+    <ul class="checklist">
+      <li>病院で検査しても「異常なし」。でも、確かに調子が優れない</li>
+      <li>特定の場所・家・人のそばにいると、気分や体調が変わる</li>
+      <li>努力しているのに、なぜか同じ失敗・同じ苦労を繰り返す</li>
+      <li>家系的に、似たような不運・不調・お金の悩みが続いている気がする</li>
+      <li>自己啓発も、健康法も、開運法も試した。それでも現実が変わらない</li>
+    </ul>
+    <p class="bridge">もし1つでも当てはまるなら——<br>
+    問題は「あなたの努力不足」ではなく、<br>
+    <strong>あなたに干渉している"目に見えない何か"</strong>にあるのかもしれません。</p>
+  </div>
+</section>
+
+<!-- 定義 -->
+<section id="about">
+  <div class="wrap rv">
+    <p class="eyebrow"><svg class="eyebrow-icon" viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M424-320q0-81 14.5-116.5T500-514q41-36 62.5-62.5T584-637q0-41-27.5-68T480-732q-51 0-77.5 31T365-638l-103-44q21-64 77-111t141-47q105 0 161.5 58.5T698-641q0 50-21.5 85.5T609-475q-49 47-59.5 71.5T539-320H424Zm56 240q-33 0-56.5-23.5T400-160q0-33 23.5-56.5T480-240q33 0 56.5 23.5T560-160q0 33-23.5 56.5T480-80Z"/></svg>WHAT IS MV</p>
+    <h2>MVは、いわゆるスピリチュアルショップではありません。<br>「エネルギー問題」の研究所です。</h2>
+    <p class="lead">世の中に「環境問題」や「健康問題」があるように、まだ広くは知られていない<b>「エネルギー問題」</b>がある——これがMVの出発点です。他人の念、土地や家の"場"、家系から受け継ぐ情報、目に見えない干渉。本人の努力だけでは対処しきれない見えない要因が、糸のように絡まり合い引き起こす諸問題。<br>MVは2009年から、その原因の究明と、向き合い方の探究を続けてきました。</p>
+    <div class="kw">
+      <div class="kw-iconbox"><svg class="kw-icon" viewBox="0 -960 960 960" width="48" height="48" fill="currentColor" aria-hidden="true"><path d="M100-120q-24.75 0-42.37-17.63Q40-155.25 40-180v-560h60v560h740v60H100Zm120-120q-24.75 0-42.37-17.63Q160-275.25 160-300v-520q0-24.75 17.63-42.38Q195.25-880 220-880h240l80 80h320q24.75 0 42.38 17.62Q920-764.75 920-740v440q0 24.75-17.62 42.37Q884.75-240 860-240H220Zm0-60h640v-440H515l-80-80H220v520Zm0 0v-520 520Z"/></svg><b>情報</b><span>家系・過去生・自分自身に紐づく「情報場」。人生パターンの設計図。</span></div>
+      <div class="kw-iconbox"><svg class="kw-icon" viewBox="0 -960 960 960" width="48" height="48" fill="currentColor" aria-hidden="true"><path d="M285-240v-480h60v480h-60ZM450-80v-800h60v800h-60ZM120-400v-160h60v160h-60Zm495 160v-480h60v480h-60Zm165-160v-160h60v160h-60Z"/></svg><b>周波数</b><span>思考・感情、あらゆるものの固有の振動数。同じ帯域のものが引き合い、合わないものは反発し合う。</span></div>
+      <div class="kw-iconbox kw-energy"><svg class="kw-icon" viewBox="0 -960 960 960" width="48" height="48" fill="currentColor" aria-hidden="true"><path d="m480-225 75.86-75.44H660V-404l76-76-75.9-75.9v-104.2H555.9L480-736l-75.9 75.9H299.9v104.2L224-480l76 75.86V-300h102l78 75Zm1 196L346-160H160v-186L26-480l134-134v-186h186l135-134 133 134h186v186l134 134-134 134v186H614L481-29Zm0-84 107.92-107H740v-151l109-109-109-109v-151H589L481-849 371-740H220v151L111-480l109 109v151h150l111 107Zm0-368Z"/></svg><b>エネルギー</b><span>人・土地・場所・モノに蓄積した情報エネルギー。良くも悪くも干渉し合う。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 三層図 -->
+<section id="theory" style="padding-top:0">
+  <div class="wrap rv">
+    <p class="eyebrow"><svg class="eyebrow-icon" viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M440-560q33 0 56.5-23.5T520-640q0-33-23.5-56.5T440-720q-33 0-56.5 23.5T360-640q0 33 23.5 56.5T440-560Zm0 160q45 0 84.5-19t68.5-54q-35-23-73.5-35T440-520q-41 0-79.5 12T287-473q29 35 68.5 54t84.5 19Zm384 280L636-308q-41 32-90.5 50T440-240q-134 0-227-93t-93-227q0-134 93-227t227-93q134 0 227 93t93 227q0 56-18 105.5T692-364l188 188-56 56ZM440-320q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Zm0-240Z"/></svg>STRUCTURE</p>
+    <h2>多くの解決法が届かない、<br>いちばん深い層から見つめ直す。</h2>
+    <p class="lead">MVでは、人生の問題は複数の層でつながっていると考えます。表面の問題だけをいくら磨いても現実が変わりにくいのは、より深い層に真の原因が残っているから——。</p>
+    <div class="layers">
+      <div class="layer layer-face">
+        <span class="tag">表層</span><h3>現実の問題</h3>
+        <p>お金・健康・人間関係・仕事。多くの解決法（努力、ノウハウ、開運法）はこの層だけに働きかけます。</p>
+      </div>
+      <div class="layer-arrow">▲ 現実は、深い層から形づくられる</div>
+      <div class="layer layer-brain">
+        <span class="tag">中層</span><h3>思考・感情・脳・周波数</h3>
+        <p>思い込み・ネガティブ感情、親から受け継いだ貧乏思考・不幸体質、発している周波数。心理学や自己啓発が扱うのは主にこの層の一部まで。</p>
+      </div>
+      <div class="layer-arrow">▲ これらは、さらに深層に影響される</div>
+      <div class="layer deep layer-storm">
+        <span class="tag">深層</span><h3>情報場とエネルギー</h3>
+        <p>家系・過去生・自分の「情報場」、土地や場のエネルギー、邪気・霊的な干渉。<b>MVが研究し、働きかけるのはこの最深層です。</b>ここが整うと、他の層も自然とよりよく変化する——これがMVのアプローチです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ストーリー -->
+<section class="story" id="story">
+  <div class="wrap rv">
+    <p class="eyebrow"><svg class="eyebrow-icon" viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480v-380l241 181q31-47 70.5-97T480-880q45 50 86 101.5t72 99.5l242-181v380q0 83-31.5 156T763-197q-54 54-127 85.5T480-80q-83 0-156-31.5ZM707-253q93-93 93-227v-220L616-562q-45-72-73-114t-63-84q-35 43-65 87t-71 111L160-700v220q0 134 93 227t227 93q134 0 227-93ZM480-460Z"/></svg>ORIGIN</p>
+    <h2>すべては、主宰Maayaの<br>「病名がつかない苦しみ」から始まりました。</h2>
+    <ol class="tl">
+      <li>
+        <h3>極度に敏感な体質として生まれる</h3>
+        <p>幼い頃から、他人や場所の影響を受けて心身が揺らぐ日々。多くの人が感じずに済むものを感じ取ってしまい、生きるのが精一杯の毎日でした。</p>
+      </li>
+      <li>
+        <h3>病院では、常に「異常なし」</h3>
+        <p>検査データはいつも正常。病名すらつかず、治療の対象にもならない。東洋医学・食事療法・風水・家相・先祖供養——古今東西のあらゆる方法を試しても、現実は変わりませんでした。</p>
+      </li>
+      <li>
+        <h3>「原因は、目に見えない側にある」という気づき</h3>
+        <p>住む家や訪れる場所で体調が変わる。他人の念や場のエネルギーが自分に干渉している——探求の焦点が、自分を取り巻く“見えない要因”へと移っていきます。</p>
+      </li>
+      <li>
+        <h3>夫Shinとの出会い、二人三脚の研究へ</h3>
+        <p>見えない世界の探求経験を持つShinと出会い、「一緒に向き合い、必ず二人で解決しよう」と研究を本格化。流行としてのスピリチュアルではない、現実を変えるための本気の探究でした。</p>
+      </li>
+      <li>
+        <span class="yr">2009</span>
+        <h3>「エネルギー問題研究所」として活動開始</h3>
+        <p>探究の中で、宇宙と現象界の「法則」や「全体像」が少しずつ見えてくるように。独自の理論を体系化し、同じ苦しみを持つ人のために、MVとしての公の活動を始めました。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 空 -->
+<section class="kuu">
+  <div class="wrap rv">
+    <div class="glyph" aria-hidden="true">空</div>
+    <p class="eyebrow" style="justify-content:center;display:flex">CORE THEORY</p>
+    <h2>解決の鍵は、<br>「創造のエネルギーに満ちた場」に。</h2>
+    <blockquote>
+      "空（くう）"とは、何も無い場ではない。<br>
+      現実世界を形づくる材料——<br>
+      周波数・エネルギー・情報を生み出す、<br>
+      創造のエネルギーに満ち満ちた場である。
+      <br><br><cite>—— MaayaVillage® 主宰 Maaya（Maaya的"空"の解釈より）</cite>
+    </blockquote>
+    <p class="desc" style="margin-top:34px">仏教で「空」と呼ばれてきたこの領域を、MVは<b>「宇宙純粋意識領域®」</b>と名付けました。善悪や優劣といった対立、固定観念や自我よりも上の次元にあり、現実を形づくる"素"に満ちた源泉の場。MVの製品とサービスはすべて、この領域をはじめとする高次元の波動を研究し、活用して生まれています。</p>
+  </div>
+</section>
+
+<!-- 4ステップ -->
+<section id="start" style="padding-top:0">
+  <div class="wrap rv">
+    <p class="eyebrow"><svg class="eyebrow-icon" viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M220-520 80-600v-160l140-80 140 80v160l-140 80Zm0-92 60-34v-68l-60-34-60 34v68l60 34Zm440 123v-93l140 82v280L560-80 320-220v-280l140-82v93l-60 35v188l160 93 160-93v-188l-60-35Zm-140 89v-480h360l-80 120 80 120H600v240h-80Zm40 69ZM220-680Z"/></svg>APPROACH</p>
+    <h2>MVのアプローチは、4つのステップ。</h2>
+    <p class="lead">MVの製品・サービスは多岐にわたりますが、すべてはこの4ステップのどこかに位置づけられます。「何から始めればいいか」は、今のあなたの段階から選べます。</p>
+    <div class="steps">
+      <div class="step step-icon step1">
+        <span class="no">STEP 01</span>
+        <h3>知る</h3>
+        <p>自分を縛っている"見えない原因"に気づく。まずは知ることが、すべての始まりです。</p>
+        <p class="to"><a href="https://ameblo.jp/maya-happy-life/" target="_blank" rel="noopener">ブログ</a><a href="https://www.youtube.com/@maayachannel" target="_blank" rel="noopener">公式YouTubeチャンネル</a></p>
+      </div>
+      <div class="step step-icon step2">
+        <span class="no">STEP 02</span>
+        <h3>祓う・浄化する</h3>
+        <p>邪気や不要なエネルギーを取り除き、まっさらな状態へ。土台を整える工程です。</p>
+        <p class="to"><a href="https://maayavillage.ocnk.net/product-group/4" target="_blank" rel="noopener">邪気・霊障祓い</a><a href="https://maayavillage.ocnk.net/product-list/109" target="_blank" rel="noopener">浄化用ソルト</a><a href="https://maayavillage.ocnk.net/product-list/139" target="_blank" rel="noopener">情報スキンケア</a></p>
+      </div>
+      <div class="step step-icon step3">
+        <span class="no">STEP 03</span>
+        <h3>整える・書き換える</h3>
+        <p>家系・過去生・自分の「情報場」と周波数を整え、人生パターンの基礎を立て直します。</p>
+        <p class="to"><a href="https://maayavillage.ocnk.net/product-list/151" target="_blank" rel="noopener">遠隔ヒーリング</a><a href="https://maayavillage.ocnk.net/product-list/121" target="_blank" rel="noopener">情報場調整</a><a href="https://maayavillage.ocnk.net/product-list/148" target="_blank" rel="noopener">ブレインエステ®</a></p>
+      </div>
+      <div class="step step-icon step4">
+        <span class="no">STEP 04</span>
+        <h3>上げる・繋がる</h3>
+        <p>高次元の波動と繋がり、本来の力が発揮されやすい状態へ。日常で使えるツールが揃います。</p>
+        <p class="to"><a href="https://maayavillage.ocnk.net/product-list/34" target="_blank" rel="noopener">波動転写グッズ</a><a href="https://maayavillage.ocnk.net/product-list/25" target="_blank" rel="noopener">『宇宙の泉®』</a><a href="https://maayavillage.ocnk.net/product-list/95" target="_blank" rel="noopener">ブレスレット</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9ワールド -->
+<section class="worlds">
+  <div class="wrap rv">
+    <p class="eyebrow"><svg class="eyebrow-icon" viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M472-159q-33 0-56.5-24T392-240q0-33 23.5-56.5T472-320l24-23q8-8 18.5-12.5T536-360q23 0 39.5 17t16.5 40v17q0 20 13 33t33 13q15 0 27-9t17-23l12-33q9-24 29-39.5t46-15.5q11-28 17.5-58t6.5-62q0-89-44.5-162.5T632-758v38q0 33-23.5 56.5T552-640h-40v80q0 17-11.5 28.5T472-520h-40v68q0 22-15 37t-37 15q-14 0-25.5-6T336-423l-64-97h-40v40q0 31-21 53t-50 26q26 104 112.5 173T472-159Zm80-241q-17 0-28.5-11.5T512-440q0-17 11.5-28.5T552-480h40q17 0 28.5 11.5T632-440q0 17-11.5 28.5T592-400h-40Zm93-120q-20 0-31.5-15.5T608-570l15-44q4-12 14-19t22-7q20 0 31.5 15.5T696-590l-15 44q-4 12-14 19t-22 7ZM472-80q-83 0-156-31.5T189-197q-54-54-85.5-127T72-480q0-83 31.5-156T189-763q54-54 127-85.5T472-880q83 0 156 31.5T755-763q54 54 85.5 127T872-480q0 83-31.5 156T755-197q-54 54-127 85.5T472-80Z"/></svg>9 WORLDS</p>
+    <h2>あなたの願いから選べる、<br>9つの高次元ワールド。</h2>
+    <p class="lead">MVの製品は、Maayaが情報の場に創り出した高次元ワールドの波動を、浄化のうえ一つひとつ手作業で転写したオリジナルグッズです。悩みや願いに合わせて、入口を選んでください。</p>
+    <div class="wgrid">
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/10" target="_blank" rel="noopener"><span class="wno">WORLD 01</span><b>宇宙純粋意識領域®</b><span>すべての源泉の場と繋がる</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/3" target="_blank" rel="noopener"><span class="wno">WORLD 02</span><b>超金運・超財運</b><span>お金と豊かさの流れを見つめ直す</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/9" target="_blank" rel="noopener"><span class="wno">WORLD 03</span><b>成功・仕事・勝利</b><span>挑戦と勝負の場面を支える</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/8" target="_blank" rel="noopener"><span class="wno">WORLD 04</span><b>頭脳・インスピレーション</b><span>ひらめきと明晰さを求める人へ</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/7" target="_blank" rel="noopener"><span class="wno">WORLD 05</span><b>カルマ・トラウマ・過去超越</b><span>繰り返すパターンと向き合う</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/5" target="_blank" rel="noopener"><span class="wno">WORLD 06</span><b>宇宙情報・宇宙意識</b><span>より広い視座と情報へ</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/4" target="_blank" rel="noopener"><span class="wno">WORLD 07</span><b>邪気祓い・霊障解消</b><span>見えない干渉から身を守る</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/2" target="_blank" rel="noopener"><span class="wno">WORLD 08</span><b>良縁・人気・魅力・美</b><span>人と縁に恵まれる自分へ</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/6" target="_blank" rel="noopener"><span class="wno">WORLD 09</span><b>健康・若返り</b><span>心身のコンディションを支える</span></a>
+      <a class="wcard" href="https://maayavillage.ocnk.net/product-group/1" target="_blank" rel="noopener"><span class="wno">WORLD 10</span><b>アセンション</b><span>意識の次元を上げていく</span></a>
+    </div>
+    <p class="note" style="margin-top:22px">※迷ったら、まずは「<a href="https://maayavillage.ocnk.net/product-group/11" target="_blank" rel="noopener">強力！全ワールド</a>」からご覧ください。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap rv">
+    <p class="eyebrow"><svg class="eyebrow-icon" viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M880-80 720-240H320q-33 0-56.5-23.5T240-320v-40h440q33 0 56.5-23.5T760-440v-280h40q33 0 56.5 23.5T880-640v560ZM160-473l47-47h393v-280H160v327ZM80-280v-520q0-33 23.5-56.5T160-880h440q33 0 56.5 23.5T680-800v280q0 33-23.5 56.5T600-440H240L80-280Zm80-240v-280 280Z"/></svg>FAQ</p>
+    <h2>よくいただく質問に、<br>正面からお答えします。</h2>
+    <details>
+      <summary>宗教ですか？</summary>
+      <p>いいえ。MVは特定の宗教・宗派とは関係のない、独立した研究所です。美容師さんや歯医者さんのように、目に見えない情報を扱う専門家として必要な時にのみご利用ください。</p>
+    </details>
+    <details>
+      <summary>正直、怪しくないですか？</summary>
+      <p>初めての方がそう感じるのは自然なことです。MVは2009年から活動内容を公開し続けています。まずは無料の<a href="https://ameblo.jp/maya-happy-life/" target="_blank" rel="noopener">ブログ</a>や<a href="https://www.youtube.com/@maayachannel" target="_blank" rel="noopener">YouTube動画</a>から、ご自身の感覚で確かめてみてください。合わないと感じたら、そこで閉じていただいて構いません。</p>
+    </details>
+    <details>
+      <summary>病気や不調は治りますか？</summary>
+      <p>MVの製品・サービスは、病気の治療を目的としたものではありません。心身に疾患がある場合は、必ず医師にご相談ください。MVが取り組むのは、医療とは異なる「エネルギー」の領域です。</p>
+    </details>
+    <details>
+      <summary>効果は保証されますか？</summary>
+      <p>体感や変化には個人差があり、効果を保証するものではありません。だからこそMVは、まず無料のコンテンツで世界観に触れていただくことをおすすめしています。</p>
+    </details>
+    <details>
+      <summary>何から始めればいいですか？</summary>
+      <p>まずは無料のコンテンツからどうぞ。映像で感じたい方は<a href="https://www.youtube.com/@maayachannel" target="_blank" rel="noopener">公式YouTubeチャンネル「悟り系霊能師ま〜やちゃんネル。」</a>、読みものから始めたい方は<a href="https://ameblo.jp/maya-happy-life/" target="_blank" rel="noopener">主宰Maayaのブログ</a>、さっそくご利用希望の方には、まず「<a href="#start">STEP2 祓う・浄化する</a>」のグッズがおすすめです。</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTAハブ -->
+<section class="hub" style="padding-top:40px">
+  <div class="wrap rv">
+    <p class="eyebrow" style="display:flex;justify-content:center">NEXT STEP</p>
+    <h2>見えないものは、存在しないのではなく、<br>まだ扱い方が知られていないだけ。</h2>
+    <p class="lead">MVは2009年から、その扱い方を研究してきました。<br>あなたの人生の"見えない原因"に、光を当ててみませんか？</p>
+    <div class="hubgrid">
+      <a class="hcard" href="https://www.youtube.com/@maayachannel" target="_blank" rel="noopener">
+        <span class="free">FREE / もっと知りたい方へ</span>
+        <b>MV公式YouTubeチャンネル</b>
+        <span>「悟り系霊能師ま〜やちゃんネル。」無料で学べる・感じる“空”の領域。</span>
+        <span class="go">視聴してみる →</span>
+      </a>
+      <a class="hcard" href="https://ameblo.jp/maya-happy-life/" target="_blank" rel="noopener">
+        <span class="free">FREE / まず読みたい方へ</span>
+        <b>主宰Maayaのブログ</b>
+        <span>宇宙法則、情報場、周波数——MVの世界観を日々発信。まずはここから。</span>
+        <span class="go">ブログを読む →</span>
+      </a>
+      <a class="hcard" href="https://maayavillage.ocnk.net/" target="_blank" rel="noopener">
+        <span class="free">SHOP / 製品を見たい方へ</span>
+        <b>MVオンラインショップ</b>
+        <span>浄化・波動転写グッズから遠隔ヒーリングまで。全製品はこちらから。</span>
+        <span class="go">ショップへ →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaimer">
+      <p>※MaayaVillage®の製品・サービスは、病気の診断・治療・予防を目的としたものではありません。心身に疾患がある場合は、医師にご相談ください。<br>
+      ※体感・変化には個人差があり、特定の効果を保証するものではありません。<br>
+      ※「宇宙純粋意識領域」「宇宙の泉」「ブレインエステ」等はMaayaVillage®の登録商標または商標です。</p>
+    </div>
+    <div class="flinks">
+      <a href="https://www.maayavillage.com/" target="_blank" rel="noopener">MV公式HP</a>
+      <a href="https://www.maayavillage.com/faq/" target="_blank" rel="noopener">よくあるご質問</a>
+      <a href="https://www.maayavillage.com/voice/" target="_blank" rel="noopener">お客様の声</a>
+      <a href="https://maayavillage.ocnk.net/info" target="_blank" rel="noopener">特定商取引法表示／プライバシーポリシー</a>
+      <a href="https://maayavillage.ocnk.net/mail" target="_blank" rel="noopener">メルマガ登録</a>
+    </div>
+    <p class="copy">Copyright © MaayaVillage® All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
